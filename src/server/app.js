@@ -18,7 +18,7 @@ const router = express.Router();
 
 // home page route (http://localhost:8080)
 router.get('/plugs/2/on', function(req, res) {
-  PythonShell.run('pythonScripts/plug2On.py', function (err) {
+  PythonShell.run('./pythonScripts/plug2On.py', function (err) {
     if (err) throw err;
     res.send('I turned the plug on!');
   });
@@ -26,7 +26,7 @@ router.get('/plugs/2/on', function(req, res) {
 
 // about page route (http://localhost:8080/about)
 router.get('/plugs/2/off', function(req, res) {
-  PythonShell.run('pythonScripts/plug2Off.py', function (err) {
+  PythonShell.run('./pythonScripts/plug2Off.py', function (err) {
     if (err) throw err;
     res.send('I turned the plug off!');
   });
