@@ -32,10 +32,8 @@ router.get('/plugs/2/off', function(req, res) {
   });
 });
 
-// apply the routes to our application
-app.use('/', router);
-
 export default () => express()
   .use(express.static(joinPath(__dirname, 'public')))
+  .use('/', router)
   .use(serverRouter());
 
