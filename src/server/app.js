@@ -16,7 +16,6 @@ import serverRouter from './server-router';
 // get an instance of router
 const router = express.Router();
 
-// home page route (http://localhost:8080)
 router.get('/plugs/2/on', function(req, res) {
   PythonShell.run('./pythonScripts/plug2On.py', function (err) {
     if (err) throw err;
@@ -24,9 +23,22 @@ router.get('/plugs/2/on', function(req, res) {
   });
 });
 
-// about page route (http://localhost:8080/about)
 router.get('/plugs/2/off', function(req, res) {
   PythonShell.run('./pythonScripts/plug2Off.py', function (err) {
+    if (err) throw err;
+    res.send('I turned the plug off!');
+  });
+});
+
+router.get('/plugs/1/on', function(req, res) {
+  PythonShell.run('./pythonScripts/plug1On.py', function (err) {
+    if (err) throw err;
+    res.send('I turned the plug on!');
+  });
+});
+
+router.get('/plugs/1/off', function(req, res) {
+  PythonShell.run('./pythonScripts/plug1Off.py', function (err) {
     if (err) throw err;
     res.send('I turned the plug off!');
   });
