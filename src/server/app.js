@@ -7,9 +7,45 @@
  ***************************************************** */
 import express from 'express';
 import { join as joinPath } from 'path';
-import router from './server-router';
+import PythonShell from 'python-shell';
+import serverRouter from './server-router';
+
+
+// we'll create our routes here
+
+// get an instance of router
+const router = express.Router();
+
+router.get('/plugs/2/on', function(req, res) {
+  PythonShell.run('./pythonScripts/plug2On.py', function (err) {
+    if (err) throw err;
+    res.send('I turned the plug on!');
+  });
+});
+
+router.get('/plugs/2/off', function(req, res) {
+  PythonShell.run('./pythonScripts/plug2Off.py', function (err) {
+    if (err) throw err;
+    res.send('I turned the plug off!');
+  });
+});
+
+router.get('/plugs/1/on', function(req, res) {
+  PythonShell.run('./pythonScripts/plug1On.py', function (err) {
+    if (err) throw err;
+    res.send('I turned the plug on!');
+  });
+});
+
+router.get('/plugs/1/off', function(req, res) {
+  PythonShell.run('./pythonScripts/plug1Off.py', function (err) {
+    if (err) throw err;
+    res.send('I turned the plug off!');
+  });
+});
 
 export default () => express()
   .use(express.static(joinPath(__dirname, 'public')))
-  .use(router());
+  .use('/', router)
+  .use(serverRouter());
 
